@@ -7,7 +7,7 @@ First you will need to install docker, refer following link for the same:
 
 - Once done, you need to pull this image.
 ```
-docker pull sanksons/bqdeployer:v1.2
+docker pull sanksons/bqdeployer:v1.3
 ```
 - Now, add following ENV: (Modify username with your ssh user)
 ```
@@ -18,7 +18,7 @@ export SSH_USER={username}
 alias release-box='docker run -it \
 -v ${HOME}/.ssh:/root/.ssh \
 -e SSH_USER=$SSH_USER \
---mount source=bqdep,target=/usr/local/boutiqaat sanksons/bqdeployer:v1.2'
+--mount source=bqdep,target=/usr/local/boutiqaat sanksons/bqdeployer:v1.3'
 
 ```
 - Now, run the command.
