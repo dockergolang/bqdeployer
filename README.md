@@ -18,7 +18,7 @@ export SSH_USER={username}
 alias release-box='docker run -it \
 -v ${HOME}/.ssh:/root/.ssh \
 -e SSH_USER=$SSH_USER \
---mount source=bqdep,target=/usr/local/boutiqaat sanksons/bqdeployer:v1.1'
+--mount source=bqdep,target=/usr/local/boutiqaat sanksons/bqdeployer:v1.2'
 
 ```
 - Now, run the command.
