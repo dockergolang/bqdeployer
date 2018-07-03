@@ -1,0 +1,71 @@
+---
+- name: Start Deployemnt Drama.
+  hosts: "{{ hosts }}"
+  remote_user: "{{ lookup('env','SSH_USER') }}"
+  tasks:
+   - name: Start Cleanup old items for HOST => {{hosts}} project => {{projname}} RC => {{rcname}}
+     file:
+       state: absent
+       path: "/tmp/{{projname}}"
+     become: yes
+   - name: Create temporary directory
+     file:
+       state: directory
+       path: "/tmp/{{projname}}"
+   - name: Transport and Extract package.
+     unarchive:
+       src: /tmp/{{projname}}-deploy/{{rcname}}.tar.bz2
+       dest: /tmp/{{projname}}
+     become: yes
+   - name: Remove if directory exists {{projname}}/{{rcname}}
+     file:
+       state: absent
+       path: "/usr/local/boutiqaat/{{projname}}/{{rcname}}"
+     become: yes
+   - name: Create fresh directory {{projname}}/{{rcname}}
+     file:
+       state: directory
+       path: "/usr/local/boutiqaat/{{projname}}/{{rcname}}"
+     become: yes
+   - name: Migrate package contents to actual location.
+     command: cp -r /tmp/{{projname}}/{{rcname}} /usr/local/boutiqaat/{{projname}}/
+     become: true
+   - name: Modify permissions.
+     command: chown -R sankalp:sankalp /usr/local/boutiqaat/{{projname}}/{{rcname}}
+     become: true
+   - name: Switch to new RC {{rcname}}
+     command: "chdir=/usr/local/boutiqaat/{{projname}} {{ item }}"
+     with_items:
+       - unlink current
+       - ln -s {{rcname}} current
+     become: yes
+   - name: Hydrazine specific settings
+     command: "{{ item }}"
+     with_items:
+       - /usr/local/bin/supervisorctl restart hydrazine
+     become: yes
+     when: projname == "hydrazine"
+   - name: Nitrous specific settings
+     command: "{{ item }}"
+     with_items:
+       - /usr/local/bin/supervisorctl restart nitrous
+     become: yes
+     when: projname == "nitrous" 
+   - name: Nemo specific settings
+     command: "{{ item }}"
+     with_items:
+       - /usr/local/bin/supervisorctl restart nemo
+     become: yes
+     when: projname == "nemo" 
+   - name: OpticalShrink specific settings
+     command: "{{ item }}"
+     with_items:
+       - /usr/local/bin/supervisorctl restart opticalshrink
+     become: yes
+     when: projname == "opticalshrink"
+   - name: Atom specific settings
+     command: "{{ item }}"
+     with_items:
+       - /usr/local/bin/supervisorctl restart atom
+     become: yes
+     when: projname == "atom"           
