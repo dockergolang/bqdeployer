@@ -20,7 +20,7 @@ PROJ_PATH=''
 
 DEPLOYMENT_FULL_PATH=''
 BUILD_COMMAND=''
-HOST_NAME='staging'
+HOST_NAME=''
 RC_NAME=''
 
 
@@ -29,6 +29,32 @@ function error_exit
 {
  echo "$TXT_ERROR$1$txtrst" | 1>&2
  exit 1
+}
+
+function selectHost() {
+  echo ""
+  echo ${txtyellow}
+  echo "PLease select Host .."
+  echo "1. Staging"
+  echo "2. Testing:"
+  echo ${txtrst}
+  while :
+  do
+    read INPUT_STRING
+    case $INPUT_STRING in
+	  1)
+      HOST_NAME="staging"
+      break
+		  ;;
+    2)
+      HOST_NAME="testing"
+      break
+	  	;;
+    *)
+		  echo "Wrong input supplied"
+		  ;;
+     esac
+  done  
 }
 
 function selectProject() {
@@ -181,6 +207,7 @@ function showsuccess() {
 
 function main() {
     selectProject || error_exit "Not a valid project:("
+    selectHost || error_exit "Not a valid host:("
 
     showExistingRc || error_exit "Could Not Show RC list :("
     askForRcName || error_exit "Could Not Show RC list :("
