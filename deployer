@@ -147,7 +147,10 @@ done
 
 
  function showExistingRc() {
-  #echo $PROJ_PATH
+  echo "fetching RC list"
+  echo "Please wait ...."
+
+  
   cd "$PROJ_PATH"
   
   fetchTags
@@ -202,7 +205,7 @@ master projname=$PROJ_NAME"
 }
 
 function showsuccess() {
-  /usr/share/cowsay -f moofasa ${txtyellow}It seems you just got it correct.${txtrst}
+  /usr/games/cowsay -f moofasa ${txtyellow}It seems you just got it correct.${txtrst}
 }
 
 function main() {

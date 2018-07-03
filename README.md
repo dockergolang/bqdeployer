@@ -21,7 +21,6 @@ alias release-box='docker run -it \
 --mount source=bqdep,target=/usr/local/boutiqaat sanksons/bqdeployer:v1.1'
 
 ```
-
 - Now, run the command.
 ```
 source ~/.bashrc
@@ -31,4 +30,3 @@ release-box
 ```
 deployer
 ```
-

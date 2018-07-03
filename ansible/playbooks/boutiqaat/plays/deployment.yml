@@ -31,7 +31,7 @@
      command: cp -r /tmp/{{projname}}/{{rcname}} /usr/local/boutiqaat/{{projname}}/
      become: true
    - name: Modify permissions.
-     command: chown -R {{remote_user}}:gopher /usr/local/boutiqaat/{{projname}}/{{rcname}}
+     command: chown -R {{ lookup('env','SSH_USER') }}:gopher /usr/local/boutiqaat/{{projname}}/{{rcname}}
      become: true
    - name: Switch to new RC {{rcname}}
      command: "chdir=/usr/local/boutiqaat/{{projname}} {{ item }}"
