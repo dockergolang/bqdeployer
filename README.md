@@ -7,7 +7,7 @@ First you will need to install docker, refer following link for the same:
 
 - Once done, you need to pull this image.
 ```
-docker pull sanksons/bqdeployer:v1.1
+docker pull sanksons/bqdeployer:v1.2
 ```
 - Now, add following ENV: (Modify username with your ssh user)
 ```
