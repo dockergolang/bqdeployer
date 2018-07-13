@@ -68,4 +68,10 @@
      with_items:
        - /usr/local/bin/supervisorctl restart atom
      become: yes
-     when: projname == "atom"           
+     when: projname == "atom"
+   - name: Fluorescence specific settings
+     command: "{{ item }}"
+     with_items:
+       - /usr/local/bin/supervisorctl restart fluorescence
+     become: yes
+     when: projname == "fluorescence"                

@@ -36,7 +36,9 @@ function selectHost() {
   echo ${txtyellow}
   echo "PLease select Host .."
   echo "1. Staging"
-  echo "2. Testing:"
+  echo "2. Testing"
+  echo "---------------"
+  echo "3. ALL"
   echo ${txtrst}
   while :
   do
@@ -50,6 +52,10 @@ function selectHost() {
       HOST_NAME="testing"
       break
 	  	;;
+    3)
+      HOST_NAME="all"
+      break
+	  	;;  
     *)
 		  echo "Wrong input supplied"
 		  ;;
@@ -66,6 +72,7 @@ function selectProject() {
   echo "3. nemo"
   echo "4. opticalshrink"
   echo "5. atom"
+  echo "6. fluorescence"
   echo ${txtrst}
 while :
 do
@@ -116,7 +123,16 @@ do
     PROJ_PATH="$GOPATH/src/github.com/BoutiqaatREPO/atom"
     BUILD_COMMAND="getsetgo deploy"
     break
-    ;;        
+    ;;
+  6)
+    echo "Deploying Fluorescence!"
+    export GOPATH=/usr/local/fluorescence/atom
+    export GOBIN=/usr/local/fluorescence/atom/bin
+    PROJ_NAME="fluorescence"
+    PROJ_PATH="$GOPATH/src/github.com/BoutiqaatREPO/fluorescence"
+    BUILD_COMMAND="getsetgo deploy"
+    break
+    ;;            
 	*)
 		echo "Wrong input supplied"
 		;;
