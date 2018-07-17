@@ -126,8 +126,8 @@ do
     ;;
   6)
     echo "Deploying Fluorescence!"
-    export GOPATH=/usr/local/fluorescence/atom
-    export GOBIN=/usr/local/fluorescence/atom/bin
+    export GOPATH=/usr/local/boutiqaat/fluorescence
+    export GOBIN=/usr/local/boutiqaat/fluorescence/bin
     PROJ_NAME="fluorescence"
     PROJ_PATH="$GOPATH/src/github.com/BoutiqaatREPO/fluorescence"
     BUILD_COMMAND="getsetgo deploy"
